@@ -41,6 +41,7 @@ def main() :
     global accountId
     global summaryCount
     global summaryDict
+    global summaryPage
 
     for o, a in opts:
         if o in ("-u", "--url"):
