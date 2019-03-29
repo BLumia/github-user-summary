@@ -94,7 +94,11 @@ def main() :
             if currentEventType == 'PullRequestEvent' :
                 skipCurrentEvent = False
                 pr = event['payload']['pull_request']
-                eventSummaryText = "[{0} @ {1}] {2} [{3}]".format("PR", event['repo']['name'], pr['title'], "submitted")
+                prAction = event['payload']['action']
+                if prAction == 'closed' :
+                    if pr['merged_at'] is not None :
+                        prAction = 'merged'
+                eventSummaryText = "[{0} @ {1}] {2} [{3}]".format("PR", event['repo']['name'], pr['title'], prAction)
                 # print('Event Time: ' + eventCreateTime.strftime("%Y-%m-%d"))
                 # print('Repo: ' + event['repo']['name'])
                 # print('PR Title: ' + pr['title'])
